@@ -1,0 +1,11 @@
+# aliases 
+alias ..="cd .."
+alias lynx="lynx -use_mouse -nopause -accept_all_cookies"
+alias fortune="/usr/games/fortune -s  30% politics 20% men-women 20% law 20% education art"
+
+# Nostalgia stuff
+#frm $HOME/mail/pipeline
+#alias siva="finger siva@surya.cse.iitb.ac.in"
+#alias sm="lynx http://www.it.iitb.ac.in/~jaju/personal/smbak.php3"
+#alias nlynx="lynx -cfg=~/.nlynxrc $1 -nopause"
+#alias am="mutt -f '{akash}/var/spool/mail/jaju'"

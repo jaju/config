@@ -1,0 +1,67 @@
+if [ -z "$OLDHOME" ]; then
+	export OLDHOME=$HOME
+fi
+if [ -z "$OLDPATH" ]; then
+	export OLDPATH=$PATH
+fi
+if [ -z "$OLDLD_LIBRARY_PATH" ]; then
+	export OLDLD_LIBRARY_PATH=$LD_LIBRARY_PATH
+fi
+if [ -z "$OLDCVSROOT" ]; then
+	export OLDCVSROOT=$CVSROOT
+fi
+if [ -z "$OLDPS1" ]; then
+	export OLDPS1=$PS1
+fi
+if [ -z "$OLDPKG_CONFIG_PATH" ]; then
+    export OLDPKG_CONFIG_PATH=$PKG_CONFIG_PATH
+fi
+if [ -z "$OLDCLASSPATH" ]; then
+    export OLDCLASSPATH=$CLASSPATH
+fi
+
+
+b2n ()
+{
+	export HOME=$OLDHOME
+	export PATH=$OLDPATH
+	export LD_LIBRARY_PATH=$OLDLD_LIBRARY_PATH
+	export CVSROOT=$OLDCVSROOT
+	export PS1=$OLDPS1
+    export PKG_CONFIG_PATH=$OLDPKG_CONFIG_PATH
+    export CLASSPATH=$OLDCLASSPATH
+	cd
+}
+
+kosmix ()
+{
+    if [ "$HOME" = "$OLDHOME/kosmix" ]; then
+        echo "Already in $0 context"
+    else
+        export HOME=$OLDHOME/kosmix
+        export PATH=$HOME/bin:$OLDPATH
+        export LD_LIBRARY_PATH=$HOME/lib:$OLDLD_LIBRARY_PATH
+        export PS1="kosmix:%~%# "
+        export export PKG_CONFIG_PATH=$HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+        for jar in $HOME/lib/jars/*.jar; do
+            add_to_cp $jar
+        done
+        add_to_cp $HOME/workspace/adore/src
+        cd
+        source $HOME/kosmix.zshrc
+    fi
+}
+
+saraswati ()
+{
+	if [ "$HOME" = "$OLDHOME/Saraswati" ]; then
+		echo "Already in $0 context"
+	else
+		export HOME=$OLDHOME/Saraswati
+		export PATH=$HOME/bin:$OLDPATH
+		export LD_LIBRARY_PATH=$HOME/lib:$OLDLD_LIBRARY_PATH
+		export PS1="saraswati:%~%# "
+        export PKG_CONFIG_PATH=$HOME/lib/pkgconfig:$PKG_CONFIG_PATH
+		cd
+	fi
+}

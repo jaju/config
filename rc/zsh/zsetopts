@@ -1,0 +1,12 @@
+# zshoptions
+setopt -JOU964Hgh58
+setopt promptsubst
+setopt list_types
+setopt braceccl
+#setopt globcomplete
+#setopt menucomplete
+setopt nobeep
+setopt nohistbeep
+setopt nonomatch
+
+bindkey -e 
