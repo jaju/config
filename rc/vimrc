@@ -1,0 +1,503 @@
+version 7.0
+" 
+if($TERM != "linux")
+	set ttytype=ansi
+endif
+" ========================================================================
+" SETtings
+" ========================================================================
+"
+"       autoindent:  "on" as I usually write code.
+  set   autoindent
+"
+"       autowrite: "on" saves a lot of trouble
+  set noautowrite
+"
+"       backup:  backups are for wimps  ;-)
+  set nobackup
+"
+"       backspace:  '2' is much smarter.
+  set   backspace=2
+"
+"       compatible  ....
+  set nocompatible
+"
+"       comments default: sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+  set   comments=b:#,:%,fb:-,n:>,n:)
+"
+"       dictionary: english words first
+  set   dictionary=/usr/share/dict/words,/home/jaju/.words
+"
+"       digraph:    required for those umlauts
+  set   digraph
+"
+"       errorbells: damn this beep!  ;-)
+  set errorbells
+"
+"       esckeys:  I don't use no steekeen function keys!
+"  set noesckeys
+"
+"       formatoptions: tcq2 is all I need
+"set    formatoptions=tcq2
+"
+"       helpheight: zero disables this.
+  set   helpheight=0
+"
+"       hidden:
+  set   hidden
+"
+"       highlight=8b,db,es,hs,mb,Mn,nu,rs,sr,tb,vr,ws
+  set   highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
+"
+"       icon:       ...
+  set noicon
+"
+" set   iconstring  file of icon (not necessary as I don't use an icon)
+" set   iconstring
+"
+"       ignorecase:  ignore the case in search patterns?  NO!
+  set noignorecase
+"
+"       insertmode:  start in insert mode?  Naah.
+  set noinsertmode
+"
+"       joinspaces:  insert two spaces after a period with a join command. Yes!
+  set   joinspaces
+"
+"       laststatus:  show status line?  Yes, always!  Even for only one buffer.
+  set   laststatus=2
+"
+"       magic:       use some magic in search patterns?  Why, of course!
+  set   magic
+"
+"       modeline:    ...
+  set nomodeline
+"
+"       number:      ...
+  set nonumber
+"
+"       path:        list of directories to search for files with edit commands
+  set   path=.,,~/github/hypar2,~/public_html/**
+"
+"       report:      show report when N lines were changed. report all changes!
+  set   report=0
+"
+"       ruler:       show cursor position?  Yep!
+  set   ruler
+"
+"       shell for UNIX -   inf.fu-berlin.de BSD&Solaris
+set   shell=zsh
+"
+"       shiftwidth:  Number of spaces to use for each step of (auto)indent.
+  set   shiftwidth=4
+"
+"       shortmess:   Kind of messages to show.   Abbreviate them all!
+  set   shortmess=at
+"
+"       showcmd:     Show current uncompleted command?  Oh, yes, please!
+  set   showcmd
+"
+"       showmatch:   Show the matching bracket for the last ')'?  Make my day!
+  set   showmatch
+"
+"       showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
+  set   showmode
+"
+"       suffixes
+  set   suffixes=.bak.swp
+"
+"       tabstop
+  set   tabstop=2
+"
+"       title:
+  set   title
+"
+"       ttyfast:
+  set   ttyfast
+"
+"       ttybuiltin:
+  set nottybuiltin
+"
+"       t_vb:          terminal's visual bell - turned off to make Vim quiet!
+  set   t_vb=
+"
+"       whichwrap:
+  set   whichwrap=<,>
+"
+"       wildchar       the character used for "expansion" on the command line
+"                      the default value is "<C-E>" but I prefer the tab key:
+  set   wildchar=<TAB>
+"
+"       wrapmargin:
+  set   wrapmargin=1
+"
+"       writebackup:
+  set nowritebackup
+"
+" ========================================================================
+" MAPpings
+" ========================================================================
+" Caveat:  Mapping must be "prefix free", ie no mapping must be the prefix of
+" any other mapping.  Example:  "map ,abc foo" and "map ,abcd bar" will give
+" you the error message "Ambigous mapping".
+"
+" Disable the suspend for ^Z.
+map <C-Z> :shell
+"
+" Make CTRL-^ rebound to the *column* in the previous file
+  noremap <C-^> <C-^>`"
+"
+" When I let Vim write the current buffer I freuently mistype the command ":w"
+" as ":W" - so this mapping will correct this typo right at the start:
+  map :W :w
+"
+" Command line (colon mode) mappings
+" valid names are:  <Up> <Down> <Left> <Right> <Home> <End> 
+" <S-Left> <S-Right> <S-Up> <PageUp> <S-Down> <PageDown>  <LeftMouse> 
+"
+" Many shells allow editing in "Emacs Style".
+" Although I love Vi, I am quite used to this kind of editing now.
+" So here it is - command line editing commands in emacs style:
+cnoremap <C-A> <Home>
+cnoremap <C-F> <Right>
+cnoremap <C-B> <Left>
+cnoremap <ESC>b <S-Left>
+cnoremap <ESC>f <S-Right>
+"  cnoremap <ESC><C-H> <C-W>
+"
+" ========================================================================
+" VIM - Editing and updating the vimrc:
+" As I often make changes to this file I use these commands
+" to start editing it and also update it:
+"     ,v = vimrc editing (edit this file)
+map ,v :e ~/.vimrc<CR>
+"     ,u = "update" by reading this file
+map ,u :source ~/.vimrc<CR>
+"
+" General Editing
+"
+" Define "del" char to be the same backspace (saves a LOT of trouble!)
+" map <C-V>127 <C-H>
+imap  
+"
+"      ;rcm = remove "control-m"s - for those silly mails sent from DOS
+cmap ;rcm %s/<C-M>//g
+"
+"     Make whitespace visible:
+"     Sws = show whitespace
+nmap ,Sws :%s/ /·/g<C-M>
+vmap ,Sws :%s/ /·/g<C-M>
+"     Sometimes you just want to know whether there is trailing whitespace:
+"     Stws = show trailing whitespace
+nmap ,Stws :%s/  *$/·/g<C-M>
+vmap ,Stws :%s/  *$/·/g<C-M>
+"
+"      CD = cd to www directories
+cmap CD cd ~/public_html/
+"
+"      ,ce = "clear empty lines" - deletes all empty or "whitespace only" lines
+cmap ,ce g/^[<C-I> ]*$/d
+"
+"    ,D = "clear quoted empty lines"
+" deletes all lines which start with '>' and any amount of following spaces
+" the vmap definition allows to apply this to visual selected text only.
+nmap ,D :%s/^> *$//
+vmap ,D :s/^> *$//
+"
+"    ,ksr = "kill space runs"
+" substitutes runs of two or more space to a single space.
+nmap ,ksr :%s/  */ /g
+vmap ,ksr :s/  */ /g
+"
+"    ,Sl = "squeeze lines" - turns a block of empty lines into *one* empty line
+nmap ,Sl :g/^$/,/./-j
+vmap ,Sl :g/^$/,/./-j
+"
+" Remove ALL auto-commands.  This avoids having the autocommands twice when
+" the vimrc file is sourced again.
+autocmd!
+
+
+"      ,dp = dequote current paragraph
+map ,dp {jma}kmb:'a,'bs/^> //<CR>
+vmap ,dp :s/^> //<CR>
+"
+"      ,qp = quote current paragraph
+"  map ,qp {jma}kmb:'a,'bs/^/> /<CR>
+map ,qp bs/^/> /<CR>
+vmap ,qp :s/^/> /<CR>
+"
+" Changing quote style to the one-and-onlt true quote prefix string "> ":
+"
+"       Fix Supercite aka PowerQuote (Hi, Andi! :-):
+"	before ,kpq:	>   Sven> text
+"	after  ,kpq:	> > text
+"      ,kpq kill power quote
+vmap ,kpq :s/^> *[a-zA-Z]*>/> >/<C-M>
+"
+"	Fix various other quote characters:
+"      ,fq "fix quoting"
+vmap ,fq :s/^> \([-":}\|][ <C-I>]\)/> > /
+"
+" Part 4 - Weed Headers of quoted mail/post
+"
+"      ,we = "weed email header"
+nmap ,we !apegrep "^(Date:\|From \|From:\|Subject:\|To:\|$)"
+"      ,wp = "weed post header"
+nmap ,wp !apegrep "^(Date:\|From:\|Subject:\|Newsgroups:\|Followup-To:\|Keywords:\|References:\|Message-ID\|$)"
+"
+"      ,ri = Read in the basic lines from the email header when replying
+"          This assume that you are using ELM which comes with utility "readmsg"
+nmap ,ri :r!readmsg\|egrep "^From:\|^Subject:\|^Date:\|^To: \|^Cc:"
+"
+"
+" Part 5 - Reformatting Text
+"
+"      ,b = break line in commented text
+nmap ,b dwi<CR>> <ESC>
+"      ,j = join line in commented text
+map  ,j Jxx
+"
+"      ,B = break line at current position *and* join the next line
+nmap ,B i<CR>><ESC>Jxx
+"
+" Turning dot runs with following spaces into an end-of-sentence (".  ").
+" [A tribute to the "elephant" guy, Silke Potschies and other ellipses freaks.]
+vmap ,dot :s/\.\+ \+/.  /g
+"
+"   ,cc = "copy notice" (tell addressee that text is a copy of an article)
+"   This assumes that there is exactly one empty line after the first
+"   paragraph and the first line of the second paragraph contains the return
+"   address with a trailing colon (which after the copy will be removed).
+map ,cc 1G}jyykPICc: <ESC>$x
+" map ,cc ma1G}jy/ writes<CR>'aoCc: <ESC>$p
+"
+"     ,mlu = make letter urgent  (by giving the "Priority: urgent")
+map ,mlu 1G}OPriority: urgent<ESC>
+"
+"    Pet peeve:  Unmeaningful Subject lines.  Change them!
+"    This command keeps the old Subject line in "X-Old-Subject:" -
+"    so the recipient can still search for it and you keep a copy for editing.
+"     ,cs = change Subject: line 
+map ,cs 1G/^Subject: <CR>yypIX-Old-<ESC>-W
+"
+" Part 6  - Inserting Special or Standard Text
+" Part 6a - Start of text - saying "hello".
+"
+"     ,hi = "Hi!"        (indicates first reply)
+map ,hi 1GOHi!<CR><ESC>
+au BufRead mutt*,.letter,nn.* :map ,hi 1G}oHi!<CR><ESC>
+"
+"     ,ha = "helloagain"  (indicates reply to reply)
+map ,ha 1GOHello, again!<CR><ESC>
+au BufRead mutt*,.letter,nn.* :map ,ha 1G}oHello, again!<CR><ESC>
+"
+"     ,re = "Hi!"        (indicates some reply)
+map ,re 1GORe!<CR><ESC>
+au BufRead mutt*,.letter,nn.* :map ,re 1G}oRe!<CR><ESC>
+"
+" Part 6  - Inserting Special or Standard Text
+" Part 6b - End of text - dealing with "signatures".
+"
+"	remove signatures
+"
+"     ,kqs = kill quoted sig (to remove those damn sigs for replies)
+map ,kqs G?^> *-- $<CR>dG
+"     ,kqs = kill quoted sig unto start of own signature:
+" map ,kqs G?^> *-- $<CR>d/^-- $/<C-M>
+"
+"      ,s = "sign" - read in signature file (requires manual completion)
+nmap ,s :r!agrep -d "^-- $" ~/public_html/sig/SIGS<ESC>b
+"
+"      ,t = "text" - read in text file (requires manual completion)
+nmap ,t :r ~/public_html/txt/
+"
+" MUTT: Auto-kill signatures for replies
+" map ,kqs G?^> *-- $<C-M>dG
+" autocmd BufRead mutt* :normal ,kqs
+"
+"
+" ===========================================================================
+" HTML - reading in the current date
+" ===========================================================================
+"
+"       ,X  = add extra short date
+map   ,X :r!date +\%y\%m\%d<CR>I<br>[<ESC>A]<ESC>
+"       ,L  = "Last updated" - insert time stamp and delete old time stamp
+map   ,L mz1G/Last update: */e+1<CR>D:r!date<CR>kJ
+"       ,dt = "date and time insert"
+map   ,dt :r!date +\%y\%m\%d\%t\%T<CR>
+"       ,cr = "created" - create the "Created" line in HTML files
+map   ,cr OCreated:     <ESC>:r!date<CR>kJWWWdWi00:00:00 <ESC>A<br><ESC>
+"       ,da = date insert
+map   ,da :r!date<CR>
+"
+" HTML - make current word an HTML environment
+map ,me yapa></<ESC>Ea><ESC>Bi<<ESC>/><<CR>
+" map! ,c =1Bb"aywi<=1Bea></=1B"apa>=1Bbba
+"
+" ========================================================================
+" PGP - encryption and decryption
+" ========================================================================
+"
+" encrypt
+nmap ;e :%!/bin/sh -c 'pgp -feast 2>/dev/tty'
+vmap ;e :%!/bin/sh -c 'pgp -feast 2>/dev/tty'
+" decrypt
+nmap ;d :/^-----BEG/,/^-----END/!/bin/sh -c 'pgp -f 2>/dev/tty'
+vmap ;d :/^-----BEG/,/^-----END/!/bin/sh -c 'pgp -f 2>/dev/tty'
+" sign 
+nmap ;s :,$! /bin/sh -c 'pgp -fast +clear 2>/dev/tty'
+" 
+nmap ;v :,/^-----END/w !pgp -m
+"
+" PGP - original mappings
+"
+"       encrypt and sign (useful for mailing to someone else)
+"csh: map #1 :,$! /bin/sh -c 'pgp -feast 2>/dev/tty^V|^V|sleep 4'
+" sh: map #1 :,$! pgp -feast 2>/dev/tty^V|^V|sleep 4
+"
+"       sign (useful for mailing to someone else)
+"csh: map #2 :,$! /bin/sh -c 'pgp -fast +clear 2>/dev/tty'
+" sh: map #2 :,$! pgp -fast +clear 2>/dev/tty
+"
+"       decrypt
+"csh: map #3 :/^-----BEG/,/^-----END/! /bin/sh -c 'pgp -f 2>/dev/tty^V|^V|sleep 4'
+" sh: map #3 :/^-----BEG/,/^-----END/! pgp -f 2>/dev/tty^V|^V|sleep 4
+"
+"       view (pages output, like more)
+"csh: map #4 :,/^-----END/w !pgp -m
+" sh: map #4 :,/^-----END/w !pgp -m
+"
+"       encrypt alone (useful for encrypting for oneself)
+"csh: map #5 :,$! /bin/sh -c 'pgp -feat 2>/dev/tty^V|^V|sleep 4'
+" sh: map #5 :,$! pgp -feat 2>/dev/tty^V|^V|sleep 4
+"
+" Elijah http://www.mathlab.sunysb.edu/~elijah/pgppub.html says :
+" The significant feature is that stderr is redirected independently of
+" stdout, and it is redirected to /dev/tty which is a synonym for the current
+" terminal on Unix.  I don't know why the ||sleep 4 stuff is there, but it is
+" harmless so I left it. Since csh is such junk, special rules are used if you
+" are using it (tcsh, too). ksh and bash should use the sh form. zsh, et al:
+" consult your manual.  The #<num> format is used to map function keys. If you
+" terminal does not support the requested function key, use a literal #<num>.
+" Not all of the clones correctly support this.
+"
+" ========================================================================
+" Useful stuff.  At least these are nice examples.  :-)
+" ========================================================================
+"
+"     ,t = transpose two characters next to cursor position from aXb -> bXa
+" map ,t XplxhhPl
+"
+" make space move the cursor to the right - much better than a *beep*
+" nmap \  l
+"
+"     ,E = execute line
+" map ,E 0/\$<CR>w"yy$:<C-R>y<C-A>r!<C-E>
+" This command excutes a shell command from the current line and reads in
+" its output into the buffer.  "      It assumes that the command starts with
+" the fist word after the first '$' (the shell prompt of /bin/sh).
+" Try ",E" on this line, ie place the cursor on it and then press ",E":
+" $ ls -la
+" Note: The command line commands have been remapped to tcsh style!! 
+"
+" put parentheses around "visual text" 
+" vmap ,, v`>a)<ESC>`<i(<ESC>
+"
+"      ,dr = decode/encode rot13 text
+vmap ,dr :!tr A-Za-z N-ZA-Mn-za-m
+
+"	Use this with an external "rot13" script:
+"	"    ,13 - rot13 the visual text
+"	vmap ,13 :!rot13<CR>
+"
+" Give the URL under the cursor to Netscape
+" map ,net yA:!netscape -remote "openurl <C-R>""
+"
+"
+" ========================================================================
+" ASCII tables - you may need them some day.  Save them to a file!
+" ========================================================================
+"
+" ASCII Table - | octal value - name/char |
+"
+" |000 nul|001 soh|002 stx|003 etx|004 eot|005 enq|006 ack|007 bel|
+" |010 bs |011 ht |012 nl |013 vt |014 np |015 cr |016 so |017 si |
+" |020 dle|021 dc1|022 dc2|023 dc3|024 dc4|025 nak|026 syn|027 etb|
+" |030 can|031 em |032 sub|033 esc|034 fs |035 gs |036 rs |037 us |
+" |040 sp |041  ! |042  " |043  # |044  $ |045  % |046  & |047  ' |
+" |050  ( |051  ) |052  * |053  + |054  , |055  - |056  . |057  / |
+" |060  0 |061  1 |062  2 |063  3 |064  4 |065  5 |066  6 |067  7 |
+" |070  8 |071  9 |072  : |073  ; |074  < |075  = |076  > |077  ? |
+" |100  @ |101  A |102  B |103  C |104  D |105  E |106  F |107  G |
+" |110  H |111  I |112  J |113  K |114  L |115  M |116  N |117  O |
+" |120  P |121  Q |122  R |123  S |124  T |125  U |126  V |127  W |
+" |130  X |131  Y |132  Z |133  [ |134  \ |135  ] |136  ^ |137  _ |
+" |140  ` |141  a |142  b |143  c |144  d |145  e |146  f |147  g |
+" |150  h |151  i |152  j |153  k |154  l |155  m |156  n |157  o |
+" |160  p |161  q |162  r |163  s |164  t |165  u |166  v |167  w |
+" |170  x |171  y |172  z |173  { |174  | |175  } |176  ~ |177 del|
+"
+" ========================================================================
+" ASCII Table - | decimal value - name/char |
+"
+" |000 nul|001 soh|002 stx|003 etx|004 eot|005 enq|006 ack|007 bel|
+" |008 bs |009 ht |010 nl |011 vt |012 np |013 cr |014 so |015 si |
+" |016 dle|017 dc1|018 dc2|019 dc3|020 dc4|021 nak|022 syn|023 etb|
+" |024 can|025 em |026 sub|027 esc|028 fs |029 gs |030 rs |031 us |
+" |032 sp |033  ! |034  " |035  # |036  $ |037  % |038  & |039  ' |
+" |040  ( |041  ) |042  * |043  + |044  , |045  - |046  . |047  / |
+" |048  0 |049  1 |050  2 |051  3 |052  4 |053  5 |054  6 |055  7 |
+" |056  8 |057  9 |058  : |059  ; |060  < |061  = |062  > |063  ? |
+" |064  @ |065  A |066  B |067  C |068  D |069  E |070  F |071  G |
+" |072  H |073  I |074  J |075  K |076  L |077  M |078  N |079  O |
+" |080  P |081  Q |082  R |083  S |084  T |085  U |086  V |087  W |
+" |088  X |089  Y |090  Z |091  [ |092  \ |093  ] |094  ^ |095  _ |
+" |096  ` |097  a |098  b |099  c |100  d |101  e |102  f |103  g |
+" |104  h |105  i |106  j |107  k |108  l |109  m |110  n |111  o |
+" |112  p |113  q |114  r |115  s |116  t |117  u |118  v |119  w |
+" |120  x |121  y |122  z |123  { |124  | |125  } |126  ~ |127 del|
+" 
+" ========================================================================
+" ASCII Table - | hex value - name/char |
+"
+" | 00 nul| 01 soh| 02 stx| 03 etx| 04 eot| 05 enq| 06 ack| 07 bel|
+" | 08 bs | 09 ht | 0a nl | 0b vt | 0c np | 0d cr | 0e so | 0f si |
+" | 10 dle| 11 dc1| 12 dc2| 13 dc3| 14 dc4| 15 nak| 16 syn| 17 etb|
+" | 18 can| 19 em | 1a sub| 1b esc| 1c fs | 1d gs | 1e rs | 1f us |
+" | 20 sp | 21  ! | 22  " | 23  # | 24  $ | 25  % | 26  & | 27  ' |
+" | 28  ( | 29  ) | 2a  * | 2b  + | 2c  , | 2d  - | 2e  . | 2f  / |
+" | 30  0 | 31  1 | 32  2 | 33  3 | 34  4 | 35  5 | 36  6 | 37  7 |
+" | 38  8 | 39  9 | 3a  : | 3b  ; | 3c  < | 3d  = | 3e  > | 3f  ? |
+" | 40  @ | 41  A | 42  B | 43  C | 44  D | 45  E | 46  F | 47  G |
+" | 48  H | 49  I | 4a  J | 4b  K | 4c  L | 4d  M | 4e  N | 4f  O |
+" | 50  P | 51  Q | 52  R | 53  S | 54  T | 55  U | 56  V | 57  W |
+" | 58  X | 59  Y | 5a  Z | 5b  [ | 5c  \ | 5d  ] | 5e  ^ | 5f  _ |
+" | 60  ` | 61  a | 62  b | 63  c | 64  d | 65  e | 66  f | 67  g |
+" | 68  h | 69  i | 6a  j | 6b  k | 6c  l | 6d  m | 6e  n | 6f  o |
+" | 70  p | 71  q | 72  r | 73  s | 74  t | 75  u | 76  v | 77  w |
+" | 78  x | 79  y | 7a  z | 7b  { | 7c  | | 7d  } | 7e  ~ | 7f del|
+" ========================================================================
+"
+syntax on
+"  COLOR!!!  Let's try this!
+"
+if exists("has_syntax")
+" Help files for Vim
+syntax sync maxlines=10
+" END
+endif
+
+"source $VIM/macros/file_select.vim
+map - :se wrapmargin=0<CR>
+map + :se wrapmargin=8<CR>
+map K j.
+map # :e#<CR>
+
+" For viewing Word files inline
+autocmd BufReadPre *.doc set ro
+autocmd BufReadPre *.doc set hlsearch!
+autocmd BufReadPost *.doc %!antiword "%"
+
+source ~/.vim/programming.vimrc
