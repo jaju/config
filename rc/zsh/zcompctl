@@ -493,3 +493,9 @@ compctl -g 'RCS/*(:s@RCS/@@:s/,v//)' co rlog rcs rcsdiff
 #	reply=($reply ${u%% *}@${u##* })
 #    done
 #}
+
+hosts=($(<$HOME/.hosts))
+compctl -k hosts ping telnet ssh scp sftp ftp ncftp mtr dig rsync
+compctl -g '*(-/)' + g '.*(-/)' -v cd pushd rmdir
+compctl -j -P "%" kill
+
