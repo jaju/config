@@ -10,3 +10,6 @@ setopt nohistbeep
 setopt nonomatch
 
 bindkey -e 
+
+setopt autolist menucomplete correctall login append_history
+unsetopt beep

@@ -1,18 +1,14 @@
-#[[ $TERM = "xterm" ]] && stty -parenb -istrip cs8 && ##bindkey -me
+autoload -Uz compinit
+compinit
+setopt appendhistory autocd extendedglob
+zstyle :compinstall filename "$HOME/.zshrc"
+zstyle ':completion:*' completer _expand _complete
 
-export TMPDIR=/tmp/$USER
-if [ ! -d $TMPDIR ]
-then
-	rm -rf ~/tmp
-	mkdir $TMPDIR; chmod 700 $TMPDIR
-	ln -sf $TMPDIR ~/tmp
-fi
 
 export HISTFILE="$HOME/.history"
 export HISTSIZE=1000
 export SAVEHIST=1000
-export EDITOR=vim
-export FULLNAME="`grep -w ^$USER /etc/passwd | cut -d: -f5`"
+export FULLNAME="`grep $USER: /etc/passwd | cut -d: -f5`"
 export DOMAIN=`hostname -d`
 export REPLYTO="$FULLNAME <$USER@$DOMAIN>"
 export PROMPT="%m:%~%# "
@@ -21,10 +17,27 @@ export SPROMPT="you mean, '%r' instead of '%R'? [nyae] "
 export TERM=`tset - -Q`
 #export TERM=linux
 export LYNX_TEMP_SPACE=$TMPDIR
+export EDITOR=vim
+export CVS_RSH=ssh
+
+export CC=gcc
+export CFLAGS="-O2 -mtune=native"
+export CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden"
+export RSYNC_RSH=ssh
 export GEM_HOME=$HOME/.gems
 export PATH=$GEM_HOME/bin:$PATH
-hosts=($(<$HOME/.hosts))
+export GEM_PATH=`gem env gempath`
 watch=all
+
+alias fgrep='fgrep --color=auto'
+
+export TMPDIR=/tmp/$USER
+if [ ! -d $TMPDIR ]
+then
+	rm -rf ~/tmp
+	mkdir $TMPDIR; chmod 700 $TMPDIR
+	ln -sf $TMPDIR ~/tmp
+fi
 
 trap 'clear' 0 1
 
@@ -41,22 +54,12 @@ chpwd ()
 	esac
 }
 
-compctl -k hosts ping telnet ssh scp sftp ftp ncftp mtr dig rsync
-compctl -g '*(-/)' + g '.*(-/)' -v cd pushd rmdir
-compctl -j -P "%" kill
-
-setopt autolist menucomplete correctall login append_history
-unsetopt beep
-
-export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
-export CVSROOT=/home/cvs/repository
-export CVS_RSH=ssh
 umask 077
 ulimit -c 0
 
 export ZSHRCDIR=$HOME/.zsh
 if [ -d $ZSHRCDIR ]; then
-	for file in `find $ZSHRCDIR -type f -name 'z*'`; do
+	for file in `find $ZSHRCDIR/ -type f -name 'z*'`; do
 		source $file
 	done
 fi
@@ -68,64 +71,15 @@ fi
 #echo $bday
 #fi
 
-export CC=gcc
-export CFLAGS="-O2 -march=native"
-export CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden"
 export WNHOME=/usr/local/WordNet-3.0
 export PATH=$WNHOME/bin:$PATH
 export PATH=$GEM_HOME/bin:$PATH
-export RSYNC_RSH=ssh
 
 if [ -f $HOME/.motd ]; then
 	cat $HOME/.motd
 fi
-# The following lines were added by compinstall
-zstyle ':completion:*' completer _expand _complete
-zstyle :compinstall filename "$HOME/.zshrc"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# Local settings
 RSYNCEXCLUDESFILE=$HOME/.rsync-exclude
-
-# Kosmix...
-#krsync ()
-#{
-#	wd=`pwd`
-#	localdir=""
-#	remotedir=$REMOTEP4BASE
-#	reldir=`subdir $wd $P4BASE`
-#	if [ "x$?" = "x1" ]; then
-#		localdir=$P4BASE
-#	else
-#		localdir=$P4BASE/$reldir
-#		remotedir=$REMOTEP4BASE/$reldir
-#	fi
-#	if [ "x$1" = "xco" ]; then
-#		krsyncco $remotedir $localdir
-#	elif [ "x$1" = "xci" ]; then
-#		krsyncci $localdir $remotedir
-#	else
-#		echo "Usage: $0 <co|ci>"
-#	fi
-#}
-#
-#krsyncci ()
-#{
-#	localdir=$1
-#	remotedir=$2
-#	if [ "x$remotedir" = "x" ]; then
-#		echo "Usage: $0 <localdir> <remotedir>"
-#		return
-#	fi
-#	echo $remotedir
-#	echo $localdir
-#	echo "rsync -e ssh -crlpgoDvzu --exclude-from $RSYNCEXCLUDESFILE $localdir/ $REMOTEDEVHOST:$remotedir/"
-#	#rsync -e ssh -cavzu --exclude-from $RSYNCEXCLUDESFILE $localdir/ $REMOTEHOST:$remotedir/
-#}
-
 # Nostalgia stuff
 #gate=`echo "(- \`date +%s\` +  \`date --date 2000-02-13 +%s\`)/86400" | bc`
 #echo "			[33m[1m[5m$gate[m days to go for GATE!"
