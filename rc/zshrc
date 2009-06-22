@@ -103,3 +103,4 @@ function cd() {
 else
 echo "No findup in path!"
 fi
+cd # This loads the cd-setup file in $HOME when you create a shell
