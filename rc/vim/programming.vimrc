@@ -44,4 +44,15 @@ map <C-A> :A<CR>
 autocmd BufRead,BufEnter *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.l,*.y,*.java imap <C-O> <ESC>:TlistToggle<CR>
 autocmd BufRead,BufEnter *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.l,*.y,*.java map <C-O> :TlistToggle<CR>
 
+autocmd BufEnter,BufRead,BufNewFile,BufNew *.rb,*.erb set keywordprg=ri
+autocmd BufEnter,BufRead,BufNewFile,BufNew *.cc,*.cpp,*.c,*.C,*.cxx,*.h,*.H,*.hpp set keywordprg=man
+
 autocmd BufRead,BufEnter *.py,*.rb set shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+set wildchar=<Tab> wildmenu wildmode=full
+
+" Buffers - explore/next/previous: Alt-F12, F12, Shift-F12.
+nnoremap <Silent> <M-F12> :BufExplorer<CR>
+nnoremap <Silent> <F12> :bn<CR>
+nnoremap <Silent> <S-F12> :bp<CR>
+set grepprg=ack
+set grepformat=%f:%l:%m

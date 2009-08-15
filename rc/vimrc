@@ -193,8 +193,6 @@ nmap ,Stws :%s/  *$/·/g<C-M>
 vmap ,Stws :%s/  *$/·/g<C-M>
 "
 "      CD = cd to www directories
-cmap CD cd ~/public_html/
-"
 "      ,ce = "clear empty lines" - deletes all empty or "whitespace only" lines
 cmap ,ce g/^[<C-I> ]*$/d
 "
@@ -501,3 +499,7 @@ autocmd BufReadPre *.doc set hlsearch!
 autocmd BufReadPost *.doc %!antiword "%"
 
 source ~/.vim/programming.vimrc
+"set runtimepath=~/.vim,~/git/akita.on.rails.vimfiles/,$VIMRUNTIME
+"set runtimepath=~/.vim,$VIMRUNTIME
+au BufRead,BufNewFile COMMIT_EDITMSG setf git
+set nocursorline
