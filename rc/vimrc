@@ -1,156 +1,121 @@
 version 7.0
-" 
+ 
 if($TERM != "linux")
 	set ttytype=ansi
 endif
+
 " ========================================================================
 " SETtings
 " ========================================================================
-"
-"       autoindent:  "on" as I usually write code.
-  set   autoindent
-"
-"       autowrite: "on" saves a lot of trouble
-  set noautowrite
-"
-"       backup:  backups are for wimps  ;-)
-  set nobackup
-"
-"       backspace:  '2' is much smarter.
-  set   backspace=2
-"
-"       compatible  ....
-  set nocompatible
-"
+" autoindent:  "on" as I usually write code.
+set autoindent
+set noautowrite
+
+"backup:  backups are for wimps  ;-)
+set nobackup
+set nocompatible
+
 "       comments default: sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-  set   comments=b:#,:%,fb:-,n:>,n:)
-"
+set   comments=b:#,:%,fb:-,n:>,n:)
+
 "       dictionary: english words first
-  set   dictionary=/usr/share/dict/words,/home/jaju/.words
-"
+set   dictionary=/usr/share/dict/words,/home/jaju/.words
+
 "       digraph:    required for those umlauts
-  set   digraph
-"
+"set   digraph
+
 "       errorbells: damn this beep!  ;-)
-  set errorbells
-"
+set errorbells
+
 "       esckeys:  I don't use no steekeen function keys!
 "  set noesckeys
-"
+
 "       formatoptions: tcq2 is all I need
 "set    formatoptions=tcq2
-"
+
 "       helpheight: zero disables this.
-  set   helpheight=0
-"
-"       hidden:
-  set   hidden
-"
-"       highlight=8b,db,es,hs,mb,Mn,nu,rs,sr,tb,vr,ws
-  set   highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
-"
-"       icon:       ...
-  set noicon
-"
-" set   iconstring  file of icon (not necessary as I don't use an icon)
-" set   iconstring
-"
-"       ignorecase:  ignore the case in search patterns?  NO!
-  set noignorecase
-"
-"       insertmode:  start in insert mode?  Naah.
-  set noinsertmode
-"
+set   helpheight=0
+
+set   highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
+set noicon
+set noinsertmode
+
 "       joinspaces:  insert two spaces after a period with a join command. Yes!
-  set   joinspaces
-"
+set   joinspaces
+
 "       laststatus:  show status line?  Yes, always!  Even for only one buffer.
-  set   laststatus=2
-"
+ set   laststatus=2
+
 "       magic:       use some magic in search patterns?  Why, of course!
-  set   magic
-"
+set   magic
+
 "       modeline:    ...
-  set nomodeline
-"
-"       number:      ...
-  set nonumber
-"
+set nomodeline
+
 "       path:        list of directories to search for files with edit commands
-  set   path=.,,~/github/hypar2,~/public_html/**
-"
+  set   path=.,,~/github/hypar2/**
+
 "       report:      show report when N lines were changed. report all changes!
-  set   report=0
-"
+set   report=0
+
 "       ruler:       show cursor position?  Yep!
-  set   ruler
-"
+set   ruler
+
 "       shell for UNIX -   inf.fu-berlin.de BSD&Solaris
 set   shell=zsh
-"
+
 "       shiftwidth:  Number of spaces to use for each step of (auto)indent.
-  set   shiftwidth=4
-"
+set   shiftwidth=2
+
 "       shortmess:   Kind of messages to show.   Abbreviate them all!
-  set   shortmess=at
-"
+set   shortmess=at
+
 "       showcmd:     Show current uncompleted command?  Oh, yes, please!
-  set   showcmd
-"
+set   showcmd
+
 "       showmatch:   Show the matching bracket for the last ')'?  Make my day!
   set   showmatch
-"
+
 "       showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
-  set   showmode
-"
+set   showmode
+
 "       suffixes
-  set   suffixes=.bak.swp
-"
+set   suffixes=.bak.swp
+
 "       tabstop
-  set   tabstop=2
-"
+set   tabstop=2
+
 "       title:
-  set   title
-"
+set   title
+
 "       ttyfast:
-  set   ttyfast
-"
+set   ttyfast
+
 "       ttybuiltin:
-  set nottybuiltin
-"
+set nottybuiltin
+
 "       t_vb:          terminal's visual bell - turned off to make Vim quiet!
-  set   t_vb=
-"
+set   t_vb=
+
 "       whichwrap:
-  set   whichwrap=<,>
-"
+set   whichwrap=<,>
+
 "       wildchar       the character used for "expansion" on the command line
 "                      the default value is "<C-E>" but I prefer the tab key:
-  set   wildchar=<TAB>
-"
+set   wildchar=<TAB>
+
 "       wrapmargin:
-  set   wrapmargin=1
-"
+set   wrapmargin=1
+
 "       writebackup:
-  set nowritebackup
-"
+set nowritebackup
+
 " ========================================================================
 " MAPpings
 " ========================================================================
-" Caveat:  Mapping must be "prefix free", ie no mapping must be the prefix of
-" any other mapping.  Example:  "map ,abc foo" and "map ,abcd bar" will give
-" you the error message "Ambigous mapping".
-"
 " Disable the suspend for ^Z.
-map <C-Z> :shell
-"
-" Make CTRL-^ rebound to the *column* in the previous file
-  noremap <C-^> <C-^>`"
-"
-" When I let Vim write the current buffer I freuently mistype the command ":w"
-" as ":W" - so this mapping will correct this typo right at the start:
-  map :W :w
-"
+" map <C-Z> :shell
+
 " Command line (colon mode) mappings
 " valid names are:  <Up> <Down> <Left> <Right> <Home> <End> 
 " <S-Left> <S-Right> <S-Up> <PageUp> <S-Down> <PageDown>  <LeftMouse> 
@@ -163,37 +128,19 @@ cnoremap <C-F> <Right>
 cnoremap <C-B> <Left>
 cnoremap <ESC>b <S-Left>
 cnoremap <ESC>f <S-Right>
-"  cnoremap <ESC><C-H> <C-W>
-"
+cnoremap <ESC><C-H> <C-W>
+
 " ========================================================================
 " VIM - Editing and updating the vimrc:
-" As I often make changes to this file I use these commands
-" to start editing it and also update it:
-"     ,v = vimrc editing (edit this file)
 map ,v :e ~/.vimrc<CR>
 "     ,u = "update" by reading this file
 map ,u :source ~/.vimrc<CR>
-"
+
 " General Editing
-"
-" Define "del" char to be the same backspace (saves a LOT of trouble!)
-" map <C-V>127 <C-H>
-imap  
-"
 "      ;rcm = remove "control-m"s - for those silly mails sent from DOS
 cmap ;rcm %s/<C-M>//g
-"
-"     Make whitespace visible:
-"     Sws = show whitespace
-nmap ,Sws :%s/ /·/g<C-M>
-vmap ,Sws :%s/ /·/g<C-M>
-"     Sometimes you just want to know whether there is trailing whitespace:
-"     Stws = show trailing whitespace
-nmap ,Stws :%s/  *$/·/g<C-M>
-vmap ,Stws :%s/  *$/·/g<C-M>
-"
-"      CD = cd to www directories
-"      ,ce = "clear empty lines" - deletes all empty or "whitespace only" lines
+
+"ce = "clear empty lines" - deletes all empty or "whitespace only" lines
 cmap ,ce g/^[<C-I> ]*$/d
 "
 "    ,D = "clear quoted empty lines"
@@ -215,39 +162,38 @@ vmap ,Sl :g/^$/,/./-j
 " the vimrc file is sourced again.
 autocmd!
 
-
 "      ,dp = dequote current paragraph
 map ,dp {jma}kmb:'a,'bs/^> //<CR>
 vmap ,dp :s/^> //<CR>
-"
+
 "      ,qp = quote current paragraph
 "  map ,qp {jma}kmb:'a,'bs/^/> /<CR>
 map ,qp bs/^/> /<CR>
 vmap ,qp :s/^/> /<CR>
-"
-" Changing quote style to the one-and-onlt true quote prefix string "> ":
-"
+
+" Changing quote style to the one-and-only true quote prefix string "> ":
+
 "       Fix Supercite aka PowerQuote (Hi, Andi! :-):
 "	before ,kpq:	>   Sven> text
 "	after  ,kpq:	> > text
 "      ,kpq kill power quote
 vmap ,kpq :s/^> *[a-zA-Z]*>/> >/<C-M>
-"
+
 "	Fix various other quote characters:
 "      ,fq "fix quoting"
 vmap ,fq :s/^> \([-":}\|][ <C-I>]\)/> > /
-"
+
 " Part 4 - Weed Headers of quoted mail/post
 "
 "      ,we = "weed email header"
 nmap ,we !apegrep "^(Date:\|From \|From:\|Subject:\|To:\|$)"
 "      ,wp = "weed post header"
 nmap ,wp !apegrep "^(Date:\|From:\|Subject:\|Newsgroups:\|Followup-To:\|Keywords:\|References:\|Message-ID\|$)"
-"
+
 "      ,ri = Read in the basic lines from the email header when replying
 "          This assume that you are using ELM which comes with utility "readmsg"
 nmap ,ri :r!readmsg\|egrep "^From:\|^Subject:\|^Date:\|^To: \|^Cc:"
-"
+
 "
 " Part 5 - Reformatting Text
 "
@@ -412,8 +358,8 @@ vmap ,dr :!tr A-Za-z N-ZA-Mn-za-m
 "
 " Give the URL under the cursor to Netscape
 " map ,net yA:!netscape -remote "openurl <C-R>""
-"
-"
+map ,net yA:!firefox -remote "openurl <C-R>""
+
 " ========================================================================
 " ASCII tables - you may need them some day.  Save them to a file!
 " ========================================================================
@@ -480,7 +426,7 @@ vmap ,dr :!tr A-Za-z N-ZA-Mn-za-m
 "
 syntax on
 "  COLOR!!!  Let's try this!
-"
+
 if exists("has_syntax")
 " Help files for Vim
 syntax sync maxlines=10
@@ -498,8 +444,7 @@ autocmd BufReadPre *.doc set ro
 autocmd BufReadPre *.doc set hlsearch!
 autocmd BufReadPost *.doc %!antiword "%"
 
-source ~/.vim/programming.vimrc
+source ~/.vim/dev.vimrc
 "set runtimepath=~/.vim,~/git/akita.on.rails.vimfiles/,$VIMRUNTIME
-"set runtimepath=~/.vim,$VIMRUNTIME
-au BufRead,BufNewFile COMMIT_EDITMSG setf git
-set nocursorline
+"set runtimepath+=~/git/theonevimlib/core
+"call theonevimlibsetup#Setup()

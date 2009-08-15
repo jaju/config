@@ -56,3 +56,4 @@ nnoremap <Silent> <F12> :bn<CR>
 nnoremap <Silent> <S-F12> :bp<CR>
 set grepprg=ack
 set grepformat=%f:%l:%m
+au BufRead,BufNewFile COMMIT_EDITMSG setf git
