@@ -24,9 +24,6 @@ export CC=gcc
 export CFLAGS="-O2 -mtune=native"
 export CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden"
 export RSYNC_RSH=ssh
-export GEM_HOME=$HOME/.gems
-export GEM_PATH=`gem env gempath`
-export PATH=$GEM_HOME/bin:$PATH
 watch=all
 
 alias fgrep='fgrep --color=auto'
@@ -73,7 +70,6 @@ fi
 
 export WNHOME=/usr/local/WordNet-3.0
 export PATH=$WNHOME/bin:$PATH
-export PATH=$GEM_HOME/bin:$PATH
 
 if [ -f $HOME/.motd ]; then
 	cat $HOME/.motd
@@ -104,3 +100,4 @@ else
 echo "No findup in path!"
 fi
 cd # This loads the cd-setup file in $HOME when you create a shell
+export PATH=$HOME/.gem/ruby/1.8/bin:$PATH
