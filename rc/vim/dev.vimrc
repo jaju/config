@@ -40,3 +40,4 @@ nnoremap <Silent> <S-F12> :bp<CR>
 set grepprg=ack
 set grepformat=%f:%l:%m
 au BufRead,BufNewFile COMMIT_EDITMSG setf git
+abbrev rtag !ctags -R --Ruby-kinds=cfmF --language-force=ruby vendor lib spec app<CR>
