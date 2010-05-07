@@ -448,3 +448,4 @@ source ~/.vim/dev.vimrc
 "set runtimepath=~/.vim,~/git/akita.on.rails.vimfiles/,$VIMRUNTIME
 "set runtimepath+=~/git/theonevimlib/core
 "call theonevimlibsetup#Setup()
+autocmd BufEnter ~/.mutt/** set syntax=muttrc
