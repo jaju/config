@@ -4,7 +4,8 @@
 set wrap
 
 "-------------> programs and header files <-------------
-autocmd BufEnter,BufNewFile *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.cxx,*.l,*.y,*.java,*.ice set expandtab ai si cin formatoptions=croql tabstop=4 columns=100
+autocmd BufEnter,BufNewFile *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.cxx,*.l,*.y,*.java,*.ice set expandtab ai si cin formatoptions=croql tabstop=4
+autocmd BufEnter,BufNewFile,BufRead *.xml set expandtab ai tabstop=2
 autocmd BufEnter *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.cxx,*.l,*.y map <F1> :!man -a <cword><CR><CR>
 autocmd BufEnter *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.cxx*,.l,*.y map <F4> :!ctags -R --c++-kinds=+pcfmnt --fields=+iaSz --extra=+q .<CR>
 autocmd BufEnter *.h,*.hpp,*.H,*.c,*.cc,*.cpp,*.C,*.cxx,*.l,*.y set tags+=$HOME/.vim/cpp.tags
@@ -41,3 +42,6 @@ set grepprg=ack
 set grepformat=%f:%l:%m
 au BufRead,BufNewFile COMMIT_EDITMSG setf git
 abbrev rtag !ctags -R --Ruby-kinds=cfmF --language-force=ruby vendor lib spec app<CR>
+
+" Eclim
+autocmd BufEnter,BufRead,BufNew,BufNewFile nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
