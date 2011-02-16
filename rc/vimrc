@@ -31,14 +31,13 @@ set errorbells
 "  set noesckeys
 
 "       formatoptions: tcq2 is all I need
-"set    formatoptions=tcq2
+set    formatoptions=tcq2
 
 "       helpheight: zero disables this.
 set   helpheight=0
 
 set   highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
-set noicon
-set noinsertmode
+set   noinsertmode
 
 "       joinspaces:  insert two spaces after a period with a join command. Yes!
 set   joinspaces
@@ -51,9 +50,6 @@ set   magic
 
 "       modeline:    ...
 set nomodeline
-
-"       path:        list of directories to search for files with edit commands
-  set   path=.,,~/github/hypar2/**
 
 "       report:      show report when N lines were changed. report all changes!
 set   report=0
@@ -81,9 +77,6 @@ set   showmode
 
 "       suffixes
 set   suffixes=.bak.swp
-
-"       tabstop
-set   tabstop=2
 
 "       title:
 set   title
@@ -208,14 +201,6 @@ nmap ,B i<CR>><ESC>Jxx
 " Turning dot runs with following spaces into an end-of-sentence (".  ").
 " [A tribute to the "elephant" guy, Silke Potschies and other ellipses freaks.]
 vmap ,dot :s/\.\+ \+/.  /g
-"
-"   ,cc = "copy notice" (tell addressee that text is a copy of an article)
-"   This assumes that there is exactly one empty line after the first
-"   paragraph and the first line of the second paragraph contains the return
-"   address with a trailing colon (which after the copy will be removed).
-map ,cc 1G}jyykPICc: <ESC>$x
-" map ,cc ma1G}jy/ writes<CR>'aoCc: <ESC>$p
-"
 "     ,mlu = make letter urgent  (by giving the "Priority: urgent")
 map ,mlu 1G}OPriority: urgent<ESC>
 "
@@ -294,38 +279,6 @@ vmap ;d :/^-----BEG/,/^-----END/!/bin/sh -c 'pgp -f 2>/dev/tty'
 nmap ;s :,$! /bin/sh -c 'pgp -fast +clear 2>/dev/tty'
 " 
 nmap ;v :,/^-----END/w !pgp -m
-"
-" PGP - original mappings
-"
-"       encrypt and sign (useful for mailing to someone else)
-"csh: map #1 :,$! /bin/sh -c 'pgp -feast 2>/dev/tty^V|^V|sleep 4'
-" sh: map #1 :,$! pgp -feast 2>/dev/tty^V|^V|sleep 4
-"
-"       sign (useful for mailing to someone else)
-"csh: map #2 :,$! /bin/sh -c 'pgp -fast +clear 2>/dev/tty'
-" sh: map #2 :,$! pgp -fast +clear 2>/dev/tty
-"
-"       decrypt
-"csh: map #3 :/^-----BEG/,/^-----END/! /bin/sh -c 'pgp -f 2>/dev/tty^V|^V|sleep 4'
-" sh: map #3 :/^-----BEG/,/^-----END/! pgp -f 2>/dev/tty^V|^V|sleep 4
-"
-"       view (pages output, like more)
-"csh: map #4 :,/^-----END/w !pgp -m
-" sh: map #4 :,/^-----END/w !pgp -m
-"
-"       encrypt alone (useful for encrypting for oneself)
-"csh: map #5 :,$! /bin/sh -c 'pgp -feat 2>/dev/tty^V|^V|sleep 4'
-" sh: map #5 :,$! pgp -feat 2>/dev/tty^V|^V|sleep 4
-"
-" Elijah http://www.mathlab.sunysb.edu/~elijah/pgppub.html says :
-" The significant feature is that stderr is redirected independently of
-" stdout, and it is redirected to /dev/tty which is a synonym for the current
-" terminal on Unix.  I don't know why the ||sleep 4 stuff is there, but it is
-" harmless so I left it. Since csh is such junk, special rules are used if you
-" are using it (tcsh, too). ksh and bash should use the sh form. zsh, et al:
-" consult your manual.  The #<num> format is used to map function keys. If you
-" terminal does not support the requested function key, use a literal #<num>.
-" Not all of the clones correctly support this.
 "
 " ========================================================================
 " Useful stuff.  At least these are nice examples.  :-)
@@ -423,9 +376,8 @@ map ,net yA:!firefox -remote "openurl <C-R>""
 " | 70  p | 71  q | 72  r | 73  s | 74  t | 75  u | 76  v | 77  w |
 " | 78  x | 79  y | 7a  z | 7b  { | 7c  | | 7d  } | 7e  ~ | 7f del|
 " ========================================================================
-"
+
 syntax on
-"  COLOR!!!  Let's try this!
 
 if exists("has_syntax")
 " Help files for Vim
