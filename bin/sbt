@@ -1,0 +1,11 @@
+#!/bin/sh
+export JAVA_OPTS="-Xmx1536M -Xms256M -noverify $JAVA_OPTS"
+#export REBEL_HOME=$HOME/ZeroTurnaround/JRebel
+#export JAVA_OPTS="-javaagent:$REBEL_HOME/jrebel.jar $JAVA_OPTS"
+# http://stackoverflow.com/questions/3334911/what-does-jvm-flag-cmsclassunloadingenabled-actually-do explains flag below
+# But apparently useful only if used with the CMS compiler - no idea about that. Leaving it in until I figure out!
+export JAVA_OPTS="-XX:+CMSClassUnloadingEnabled $JAVA_OPTS"
+export JAVA_OPTS="-XX:+UseConcMarkSweepGC $JAVA_OPTS"
+export JAVA_OPTS="-XX:+ExplicitGCInvokesConcurrent $JAVA_OPTS"
+export JAVA_OPTS="-XX:MaxPermSize=256m -Xss2M $JAVA_OPTS"
+java $JAVA_OPTS -jar $HOME/.j/sbt-launch-0.7.4.jar "$@"
