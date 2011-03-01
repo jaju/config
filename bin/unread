@@ -1,0 +1,25 @@
+#!/bin/sh
+
+TOREADDIR=$HOME/ToRead
+
+if [ ! -d $TOREADDIR ]; then
+	mkdir -p $TOREADDIR
+	if [ "$?" != "0" ]; then
+		echo "Could not create directory: $TOREADDIR"
+		exit 1
+	fi
+	echo "Created toread directory: $TOREADDIR"
+fi
+
+usage()
+{
+	echo "Usage: $0 <filename>"
+}
+
+FILETOLINK=$1
+if [ ! -f $FILETOLINK ]; then
+	echo "Please supply a valid file you want unlinked"
+	exit 1
+fi
+
+for file in `ls -1

@@ -1,0 +1,38 @@
+#!/bin/sh
+
+TOREADDIR=$HOME/ToRead
+
+if [ ! -d $TOREADDIR ]; then
+	mkdir -p $TOREADDIR
+	if [ "$?" != "0" ]; then
+		echo "Could not create directory: $TOREADDIR"
+		exit 1
+	fi
+	echo "Created toread directory: $TOREADDIR"
+fi
+
+usage()
+{
+	echo "Usage: $0 <filename> [Name of link - with or without the extension] # only for file-names with ONE dot"
+}
+
+FILETOLINK=$1
+if [ ! -f $FILETOLINK ]; then
+	echo "Please supply a valid file to link to"
+	exit 1
+fi
+
+
+LINKNAME=$2
+if [ -z "$LINKNAME" ]; then
+	LINKNAME=`basename "$FILETOLINK"`
+else
+	EXTENSION="`echo $FILETOLINK | cut -d. -f2`"
+	if [ $EXTENSION = "$FILETOLINK" ]; then
+		/bin/true
+	elif [ $EXTENSION != "`echo $LINKNAME | cut -d. -f2`" ]; then
+		LINKNAME="$LINKNAME.$EXTENSION"
+	fi
+fi
+
+ln -s `pwd`/$FILETOLINK "$TOREADDIR/$LINKNAME"
