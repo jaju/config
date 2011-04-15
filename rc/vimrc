@@ -40,3 +40,6 @@ autocmd BufEnter ~/.mutt/** set syntax=muttrc
 set background=dark
 
 source ~/.vim/dev.vimrc
+
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()

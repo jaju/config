@@ -44,3 +44,4 @@ let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
 let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
 let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
 let OmniCpp_LocalSearchDecl = 1 " don't require special style of function opening braces
+autocmd FileType c set omnifunc=ccomplete#CompleteCpp
